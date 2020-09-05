@@ -4,12 +4,20 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Loan extends Model
 {
-    protected $table = 'users';
     public $timestamps = false;
+    protected $table = 'loans';
+
+   
     public function employee()
     {
         return $this->hasOne('App\Employee', 'id');
     }
+
+    public function bookCopy()
+    {
+        return $this->hasOne('App\BookCopy', 'id');
+    }
+
 }

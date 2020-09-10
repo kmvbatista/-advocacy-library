@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Book;
+use App\BookCopy;
 use Illuminate\Support\Facades\View;
 use App\Utils\HashProvider;
 
@@ -27,6 +28,9 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::all();
+        foreach($books as $book) {
+            $book->hasCopy = BookCopy::where('book_id', '=', $book->id)->first();
+        }
         return view('books', compact('books'));
     }
     /**

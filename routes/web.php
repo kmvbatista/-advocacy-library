@@ -40,6 +40,8 @@ Route::middleware([CheckIsLogged::class])->group(function () {
     Route::get('/bookCopy/create/{bookId}', 'BookCopyController@create');
 
     Route::post('/bookCopy/create/{bookId}', 'BookCopyController@store');
+
+    Route::get('/bookCopy/delete/{bookId}', 'BookCopyController@destroy');
     
     Route::get('/bookCopy/list/{bookId}', 'BookCopyController@list');
 

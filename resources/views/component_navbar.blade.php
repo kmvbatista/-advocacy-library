@@ -21,7 +21,7 @@
             <a class="nav-link" href="/loans">Empréstimos</a>
         </li>
         @endif
-        <li @if($current=="loans") class="nav-item active" @else class="nav-item" @endif>
+        <li @if($current=="myLoans") class="nav-item active" @else class="nav-item" @endif>
             <a class="nav-link" href="/my-loans">Meus empréstimos</a>
         </li>
         <li @if($current=="books") class="nav-item active" @else class="nav-item" @endif>

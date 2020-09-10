@@ -22,7 +22,7 @@ class LoginController extends Controller
 
     public function logout(Request $request) {
         $request->session()->flush();
-        return response('Deslogado com sucesso', 200);
+        return redirect('/login');
     }
 
     public function index() {

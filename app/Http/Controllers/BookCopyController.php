@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\BookCopy;
 use App\Book;
+use App\Loan;
 
 class BookCopyController extends Controller
 {
@@ -28,8 +29,8 @@ class BookCopyController extends Controller
 
     public function list($bookId)
     {
-        // $book = Book::find($bookId);
         $bookCopies = BookCopy::where('book_id', '=', $bookId)->get();
+        error_log($bookCopies);
         return view('bookCopies', compact('bookCopies'));
     }
     /**
@@ -57,7 +58,8 @@ class BookCopyController extends Controller
         $request->validate($this->getRules(), $this->messages);
         $bookCopy = $this->createBookCopy($request, $bookId);
         $bookCopy->save();
-        return redirect('/bookCopy/list/'+$bookId);
+        error_log($bookId);
+        return redirect('/bookCopy/list/'.$bookId);
     }
 
     /**
@@ -86,10 +88,12 @@ class BookCopyController extends Controller
     public function destroy($id)
     {
         $bookCopy = BookCopy::find($id);
-        if(isset($bookCopy)){
-            $bookCopy->delete();
+        $loan = Loan::where('bookCopy_id', '=', $id);
+        if($loan) {
+            $loan->delete();
         }
-        return redirect('/bookCopies');
+        $bookCopy->delete();
+        return redirect()->back();
     }
 
     private function updateBookCopy($bookCopy, $newBookCopy) {

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Employee;
+use App\User;
+use App\Loan;
 
 class EmployeeController extends Controller
 {
@@ -77,6 +79,14 @@ class EmployeeController extends Controller
     {
         $employee = Employee::find($id);
         if(isset($employee)){
+            $user = User::where('employee_id', '=', $employee->id)->first();
+            $loan = Loan::where('employee_id', '=', $employee->id)->first();
+            if($user) {
+                $user->delete();
+            }
+            if($loan) {
+                $loan->delete();
+            }
             $employee->delete();
         }
         return redirect('/employees');

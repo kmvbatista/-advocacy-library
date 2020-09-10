@@ -21,11 +21,16 @@
                     <td>{{$book->author}}</td>
                     <td>{{$book->area}}</td>
                     <td>
-                        <a href="/loans/{{$book->id}}" class="btn btn-sm btn-primary">Fazer empréstimo</a>
+                        @if($book->hasCopy)
+                            <a href="/loans/{{$book->id}}" class="btn btn-sm btn-primary">Fazer empréstimo</a>
+                        @endif
                         @if(Session::get('user')->isAdmin)
                             <a href="/bookCopy/create/{{$book->id}}" class="btn btn-sm btn-primary">Cadastrar exemplar</a>
                             <a href="/bookCopy/list/{{$book->id}}" class="btn btn-sm btn-primary">Ver exemplares</a>
                             <a href="/books/delete/{{$book->id}}" class="btn btn-sm btn-danger">Apagar</a>
+                        @endif
+                        @if(!$book->hasCopy)
+                            <p>Não possuímos exemplares desse livro</p>
                         @endif
                     </td>
                 </tr>

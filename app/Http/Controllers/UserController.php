@@ -29,6 +29,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+        error_log($users);
         return view('users', compact('users'));
     }
     /**

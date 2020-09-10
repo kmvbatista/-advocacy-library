@@ -1,9 +1,9 @@
-@extends('layout.app', ["current"=>"loans" ])
+@extends('layout.app', ["current"=>"myLoans" ])
 
 @section('body')
 <div class="card border">
     <div class="card-body">
-        <h5 class="card-title">Empréstimos</h5>
+        <h5 class="card-title">Meus empréstimos</h5>
         @if(count($loans) > 0)
         <table class="table table-ordered table-hover">
             <thead>

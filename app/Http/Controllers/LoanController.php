@@ -26,10 +26,6 @@ class LoanController extends Controller
     public function index()
     {
         $loans = Loan::all();
-        foreach($loans as $loan) {
-            $loan->employee = Employee::find($loan->employee_id);
-            $loan->bookCopy = BookCopy::find($loan->bookCopy_id);
-        }
         return view('loans', compact('loans'));
     }
     /**
@@ -53,12 +49,9 @@ class LoanController extends Controller
     }
 
     public function myLoans(Request $request) {
-        $loans = Loan::where('employee_id', '=', $request->session()->get('user')->employee->id)->get();
-        foreach($loans as $loan) {
-            $loan->employee = Employee::find($loan->employee_id);
-            $loan->bookCopy = BookCopy::find($loan->bookCopy_id);
-        }
-        return view('loans', compact('loans'));
+        $currentEmployeeId = $request->session()->get('user')->employee->id;
+        $loans = Loan::where('employee_id', '=', $currentEmployeeId)->get();
+        return view('myLoans', compact('loans'));
     }
 
     public function store($bookCopyId, Request $request)

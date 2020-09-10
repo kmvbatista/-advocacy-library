@@ -3,9 +3,9 @@
 @section('body')
 <div class="card border">
     <div class="card-body">
-        <h5 class="card-title">Exemplares de {{$bookCopies[0]->book->name}}</h5>
         
         @if(count($bookCopies) > 0)
+        <h5 class="card-title">Exemplares de {{$bookCopies[0]->book->name}}</h5>
         <table class="table table-ordered table-hover">
             <thead>
             <tr>
@@ -20,12 +20,15 @@
                     <td>{{$bookCopy->acquisitionDate}}</td>
                     <td>
                         <a href="/loans/{{$bookCopy->id}}" class="btn btn-sm btn-primary">Fazer empréstimo</a>
-                        <a href="/bookCopys/delete/{{$bookCopy->id}}" class="btn btn-sm btn-danger">Apagar</a>
+                        <a href="/bookCopy/delete/{{$bookCopy->id}}" class="btn btn-sm btn-danger">Apagar</a>
                     </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
+        @endif
+        @if(count($bookCopies) == 0)
+            <h3>Não há cópias desse livro cadastradas no momento</h3>
         @endif
     </div>
 <div class="card-footer">

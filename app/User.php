@@ -10,6 +10,6 @@ class User extends Model
     public $timestamps = false;
     public function employee()
     {
-        return $this->hasOne('App\Employee', 'id');
+        return $this->hasOne('App\Employee', 'id', 'employee_id');
     }
 }

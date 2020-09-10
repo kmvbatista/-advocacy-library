@@ -12,6 +12,6 @@ class BookCopy extends Model
 
     public function book()
     {
-        return $this->hasOne('App\Book', 'id');
+        return $this->hasOne('App\Book', 'id', 'book_id');
     }
 }

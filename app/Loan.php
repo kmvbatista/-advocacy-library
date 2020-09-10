@@ -12,12 +12,12 @@ class Loan extends Model
    
     public function employee()
     {
-        return $this->hasOne('App\Employee', 'id');
+        return $this->hasOne('App\Employee', 'id', 'employee_id');
     }
 
     public function bookCopy()
     {
-        return $this->hasOne('App\BookCopy', 'id');
+        return $this->hasOne('App\BookCopy', 'id', 'bookCopy_id');
     }
 
 }
